@@ -4,19 +4,36 @@ import Todo from "./Todo"
 const TodoList = () => {
     let [todos, setTodos] = useState([])
     let [siffra, setSiffra] = useState(0)
+    let [finished, setFinished] = useState(true)
 
     let addTodo = (todo) =>{
         
+        if(todo.text == ""){
+            alert("Please enter a task before adding it")
+        }
+        else{
+
        let newTodos = [todo, ...todos]
        setTodos(newTodos)
-      
+        }
     }
+
+    let test = (id) =>{
+        if(finished){
+        alert("double click me when you are finished with " + id + "!")
+        setFinished(!finished)
+      
+        }
+        else{
+          
+        }
+      }
 
     let updateTodo = (todoId, newValue) =>{
         
         setTodos(prev => prev.map(item =>(item.id == todoId ? newValue : item ))
         )
-
+        
     }
 
 
@@ -38,7 +55,6 @@ const TodoList = () => {
 
 
         for(let i = 0; i < todos.length; i++){
-            console.log(todos)
             if(todos[i].id == id){
                 temp = todos[i]
                 todos[i] = todos[i+1]
@@ -52,7 +68,7 @@ const TodoList = () => {
     }
 
     let changeTodoUp = (id) =>{
-        console.log(id)
+
 
         let temp = ""
         
@@ -64,7 +80,6 @@ const TodoList = () => {
 
 
         for(let i = 0; i < todos.length; i++){
-            console.log(todos)
             if(todos[i].id == id){
                 temp = todos[i]
                 todos[i] = todos[i-1]
@@ -79,23 +94,23 @@ const TodoList = () => {
 
     
     let completeTodo = (id) =>{
-        console.log(id)
+
         let updatedTodos = todos.map(todo => {if(todo.id === id){
             todo.isComplete = !todo.isComplete
         }
-        console.log("completeTodo" + "  " + todo)
+
         return todo
     })
     setTodos(updatedTodos)
-  
-    console.log(updatedTodos)
+
     }
 
     return (
         <div>
             <h1>Whats the plan for today?</h1>
             <TodoForm onSubmit = {addTodo} />
-            <Todo todos = {todos} completeTodo = {completeTodo} removeTodo = {removeTodo} updateTodo = {updateTodo} changeTodoDown = {changeTodoDown} changeTodoUp = {changeTodoUp}/>
+            <Todo todos = {todos} completeTodo = {completeTodo} removeTodo = {removeTodo} test = {test}
+            updateTodo = {updateTodo} changeTodoDown = {changeTodoDown} changeTodoUp = {changeTodoUp}/>
         </div>
     )
 }
