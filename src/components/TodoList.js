@@ -20,7 +20,7 @@ const TodoList = () => {
 
     let test = (id) =>{
         if(finished){
-        alert("double click me when you are finished with " + id + "!")
+        alert("double click " + "'" +id +"'" + " when you are finished with " + id + "!")
         setFinished(!finished)
       
         }
